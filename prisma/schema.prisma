@@ -1,12 +1,37 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Ceci est votre fichier de schéma Prisma,
+// en savoir plus à ce sujet dans la documentation : https://pris.ly/d/prisma-schema
+
+// Cette ligne est un commentaire explicatif. Elle n'affecte pas l'exécution du code.
+// Elle explique que le fichier en cours est un fichier de schéma Prisma et fournit un lien vers la documentation pour en savoir plus.
 
 generator client {
   provider = "prisma-client-js"
 }
+
+// Cette ligne définit un générateur pour le client Prisma.
+// Cela signifie que vous générez un client JavaScript pour interagir avec votre base de données.
+// Le "provider" spécifie le langage ou la technologie à utiliser pour générer le client, ici "prisma-client-js".
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
+// Cette ligne définit la source de données pour votre application.
+// Vous spécifiez le type de base de données que vous utilisez (dans ce cas, SQLite) et l'URL de la base de données.
+// L'URL est généralement stockée dans une variable d'environnement pour des raisons de sécurité.
+
+model Todo {
+  id        String   @id @default(uuid())
+  title     String
+  complete  Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Cette ligne définit un modèle de données appelé "Todo".
+// Un modèle est une représentation de la structure des données que vous stockerez dans votre base de données.
+// Dans ce modèle, vous avez des champs comme "id", "title", "complete", "createdAt" et "updatedAt",
+// chacun ayant son propre type de données et des attributs spécifiques.
+// Par exemple, "@id" indique que "id" est une clé primaire, "@default(uuid())" définit une valeur par défaut pour "id",
+// "@updatedAt" indique que "updatedAt" doit être mis à jour automatiquement lorsque l'enregistrement est modifié, etc.
